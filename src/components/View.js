@@ -6,19 +6,18 @@ import EditForm from './EditForm';
 //1. Build and import axiosWithAuth module in the utils.
 import axiosWithAuth from '../utils/axiosWithAuth';
 
+import articleService from '../services/articleServices';
+
 const View = (props) => {
     const [articles, setArticles] = useState([]);
     const [editing, setEditing] = useState(false);
     const [editId, setEditId] = useState();
 
     //2. When the component mounts, make an http request that adds all articles to state.
-    useEffect(()=>{
-        axiosWithAuth()
-            .get('/articles')
-            .then(res => {                       
-                console.log('res: ', res);
-                setArticles(res.data);
-            })
+    useEffect(()=>{        
+        articleService().then((articles) => {            
+            setArticles(articles);
+        })
             .catch(err => console.log(err));
     }, []);
 
