@@ -15,14 +15,22 @@ const View = (props) => {
     useEffect(()=>{
         axiosWithAuth()
         .get('/articles')
-        .then(res => {            
+        .then(res => {                       
             setArticles(res.data);
         })
         .catch(err => console.log(err));
     }, []);
 
-
-    const handleDelete = (id) => {
+    //3. Complete handleDelete method. It should make a request that delete the article with the included id.
+    const handleDelete = (id) => {        
+        axiosWithAuth().delete(`articles/${id}`)
+        .then (res => {   
+            //  update local state to reflect these changes.
+            setArticles(res.data);              
+        })
+        .catch(err => {
+            console.log('err');
+        })        
     }
 
     const handleEdit = (article) => {
@@ -61,7 +69,7 @@ export default View;
 
 //Task List:
 
-//3. Complete handleDelete method. It should make a request that delete the article with the included id.
+
 //4. Complete handleEdit method. It should make a request that updates the article that matches the included article param.
 
 
