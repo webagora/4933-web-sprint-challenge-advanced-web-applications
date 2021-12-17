@@ -25,12 +25,12 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();     
         if (login.username === "" || login.password === "" ) {
-            //add in error action 
+            //set error message 
             setErrorMessage("No empty of username, and password.");            
             return;  
         }   
         axios.post('http://localhost:5000/api/login', login)  
-            .then(resp => {                
+            .then(resp => {                 
                 localStorage.setItem('token', resp.data.token);
                 push ('/view');
             })
