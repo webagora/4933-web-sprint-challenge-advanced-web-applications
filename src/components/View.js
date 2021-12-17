@@ -16,6 +16,7 @@ const View = (props) => {
         axiosWithAuth()
             .get('/articles')
             .then(res => {                       
+                console.log('res: ', res);
                 setArticles(res.data);
             })
             .catch(err => console.log(err));
