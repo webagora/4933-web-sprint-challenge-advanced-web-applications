@@ -58,8 +58,26 @@ test('renders "Associated Press" when no author is given', ()=> {
     expect(alterAuthor).toBeInTheDocument();
 });
 
-// test('executes handleDelete when the delete button is pressed', ()=> {
-// });
+test('executes handleDelete when the delete button is pressed', ()=> {
+    const handleDelete = jest.fn();
+    render (<Article article={
+            {
+                id: "",            
+                headline: "",
+                createdOn: "",
+                summary: "", 
+                body: "" 
+            } 
+        }  
+        handleDelete = { handleDelete }  
+        handleEditSelect = { true } 
+    />);
+
+    const deleteButton = screen.getByTestId("deleteButton");
+    userEvent.click(deleteButton);
+
+    expect(handleDelete).toBeCalled();
+});
 
 //Task List: 
 //1. Complete all above tests. Create test article data when needed.
