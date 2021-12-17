@@ -14,29 +14,35 @@ const View = (props) => {
     //2. When the component mounts, make an http request that adds all articles to state.
     useEffect(()=>{
         axiosWithAuth()
-        .get('/articles')
-        .then(res => {                       
-            setArticles(res.data);
-        })
-        .catch(err => console.log(err));
+            .get('/articles')
+            .then(res => {                       
+                setArticles(res.data);
+            })
+            .catch(err => console.log(err));
     }, []);
 
     //3. Complete handleDelete method. It should make a request that delete the article with the included id.
     const handleDelete = (id) => {        
-        axiosWithAuth().delete(`articles/${id}`)
-        .then (res => {   
-            //  update local state to reflect these changes.
-            setArticles(res.data);              
-        })
-        .catch(err => {
-            console.log('err');
-        })        
+        axiosWithAuth().delete(`/articles/${id}`)
+            .then (res => {   
+                //  update local state to reflect these changes.
+                setArticles(res.data);              
+            })
+            .catch(err => {
+                console.log('err');
+            })        
     }
 
     const handleEdit = (article) => {
+        axiosWithAuth().put(`/articles/${editId}`, article) 
+            .then (resp => {
+                //  update local state to reflect these changes.
+                setArticles(resp.data);    
+            })
+            .catch(err => console.log(err));
     }
 
-    const handleEditSelect = (id)=> {
+    const handleEditSelect = (id)=> {        
         setEditing(true);
         setEditId(id);
     }
