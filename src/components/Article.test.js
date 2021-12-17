@@ -43,8 +43,20 @@ test('renders headline, author from the article when passed in through props', (
     expect(body).toBeInTheDocument();
 });
 
-// test('renders "Associated Press" when no author is given', ()=> {
-// });
+test('renders "Associated Press" when no author is given', ()=> {
+    render (<Article article={
+        {
+            id: "",            
+            headline: "",
+            createdOn: "",
+            summary: "", 
+            body: "" 
+        } 
+    } />) 
+
+    const alterAuthor = screen.queryByText (/associated press/i);    
+    expect(alterAuthor).toBeInTheDocument();
+});
 
 // test('executes handleDelete when the delete button is pressed', ()=> {
 // });
